@@ -4,4 +4,4 @@ you are the best.
 
 [link to render server](https://f23wb23dandyala.onrender.com)
 
-class Makeup{ String brand; String type; integer price; public(String brand, String type, integer price) { this.brand=brand; this.type=type; this.price= price;} }
+class Makeup{ String brand; integer id; integer price; public(String brand, integer id, integer price) { this.brand=brand; this.id=id; this.price= price;} }
