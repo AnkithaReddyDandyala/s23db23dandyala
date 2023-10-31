@@ -2,3 +2,8 @@ extends layout
 
 block content
   h1= title
+  - var results =[{brand:"Maybelline", id :"110", price:2000},{brand:"Lakme", id:"324", price:1500},{brand:"Swiss beauty", id:"1124", price:3000}]
+  div(class="container-fluid")
+  div(class="row")
+   each m,index  in results 
+    div(class="col-sm-2") #{m.brand}, #{m.id}, #{m.price}
