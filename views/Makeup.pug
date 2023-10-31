@@ -2,8 +2,3 @@ extends layout
 
 block content
   h1= title
-  - var results =[{brand:"Swift", id :"50000", price:20000},{brand:"Creta", id:"20000", price:15000},{brand:"Thar", id:"30000", price:30000}]
-  div(class="container-fluid")
-  div(class="row")
-   each m,index  in results 
-    div(class="col-sm-2") #{m.brand}, #{m.id}, #{m.price}
