@@ -4,6 +4,55 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+require('dotenv').config();
+const connectionString = process.env.MONGO_CON
+mongoose = require('mongoose');
+mongoose.connect(connectionString, 
+  { useNewUrlParser: true, 
+  useUnifiedTopology: true });
+
+  //Get the default connection
+var db = mongoose.connection;
+//Bind connection to error event
+db.on('error', console.error.bind(console, 'MongoDB connectionerror:'));
+db.once("open", function () {
+  console.log("Connection to DB succeeded")
+});
+
+var makeup = require("./models/makeup");
+
+async function recreateDB() {
+  // Delete everything
+  await makeup.deleteMany();
+  let instance1 = new makeup({
+    brand: "Vaseline", id: 200,
+    price: 130000
+  });
+
+  let instance2 = new makeup({
+    brand: "Keratin", id: 100,
+    price: 483000
+  });
+
+  let instance3 = new makeup({
+    brand: "Ponds", id: 340,
+    price: 640000
+  });
+
+  const newArray = [instance1.save(), instance2.save(), instance3.save()];
+  Promise.all(newArray).then(doc => {
+    console.log("First object saved")
+    console.log("Second object saved")
+    console.log("Third object saved")
+  }
+  ).catch(err => {
+    console.error(err)
+  });
+}
+let reseed = true;
+if (reseed) { recreateDB(); }
+
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var MakeupRouter = require('./routes/Makeup');
