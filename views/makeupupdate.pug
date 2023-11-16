@@ -1,31 +1,46 @@
 extends layout
+
 block content
     h1= title
-    form(id='makeupForm', action="/resource/makeup", method="POST")
-        div.form-group
-            label.vehiclesAttr(for='name') Vehicle name
-            input#name(type='text', name='name')
-        div.form-group
-            label.vehiclesAttr(for='mileage') Vehicle mileage
-            input#mileage(type='number', name='mileage')
-        div.form-group
-            label.vehiclesAttr(for='price') Vehicle price
-            input#price(type='number', name='price')
-        input(type="submit")
+
+    if (toShow == null)
+        h2 No instance to delete
+    else
+        - let makeupid = toShow._id
+        - let makeup_brand = toShow.brand
+        - let makeup_id = toShow.id
+        - let makeup_price = toShow.price
+
+        div.col.mb-2(style='background-color: #f0f0f0; padding: 10px;')
+            div.mr-1.col ID is
+            div.col #{makeupid}
+            - let actionid = "/resource/makeup/" + makeupid
+            form#makeupForm.col-md-6(offset-md-3, style='background-color: #fff; padding: 20px;', action=actionid, method="PUT") 
+                div.form-group
+                    label.makeupAttr(for='brand') Makeup brand
+                    input#brand.form-control(type='text', name='brand', value=makeup_brand)
+                div.form-group
+                    label.makeupAttr(for='id') Makeup ID
+                    input#id.form-control(type='number', name='id', value=makeup_id)
+                div.form-group
+                    label.makeupAttr(for='price') Makeup Price
+                    input#price.form-control(type='number', name='price', value=makeup_price)
+                input.btn.btn-primary(type="submit", value="Update")
+
     script.
         document.forms['makeupForm'].addEventListener('submit', (event) => {
             event.preventDefault();
-            // TODO do something here to show user that form is being submitted
-            fetch(event.target.action, {
-                method: 'POST',
+            // TODO: Add your Fetch API code here for form submission handling
+             fetch(event.target.action, {
+                method: 'PUT',
                 body: new URLSearchParams(new FormData(event.target)) // event.target is the form
-            }).then((resp) => {
+                }).then((resp) => {
                 return resp.json(); // or resp.text() or whatever the server sends
-            }).then((body) => {
-                alert("Save succeded")
+                }).then((body) => {
+                alert("Update succeded")
                 // TODO handle body
-            }).catch((error) => {
+                }).catch((error) => {
                 // TODO handle error
-                alert("Save failed " + error )
+                alert("Update failed " + error )
             });
         });
