@@ -1,0 +1,23 @@
+extends layout
+
+block content
+    h1= title
+        - let makeupid = toShow._id
+        - let makeup_brand = toShow.brand
+        - let makeup_id = toShow.id
+        - let makeup_price = toShow.price
+        
+        div
+            div.row
+                div(class='makeupAttr mr-3') Makeup ID is:
+                div #{makeupid}
+            div.row
+                div(class='makeupAttr mr-3') Makeup brand is:
+                div #{makeup_brand}
+            div.row
+                div(class='makeupAttr mr-3') Makeup id is:
+                div #{makeup_id}
+            div.row
+                div(class='makeupAttr mr-3') Makeup price is:
+                div #{makeup_price}
+        
