@@ -42,12 +42,12 @@ exports.makeup_create_post = async function (req, res) {
 exports.makeup_delete = async function(req, res) {
     console.log("delete " + req.params.id)
     try {
-    result = await Makeup.findByIdAndDelete(req.params.id)
-    console.log("Removed " + result)
-    res.send(result)
+        result = await makeup.findByIdAndDelete(req.params.id)
+        console.log("Removed " + result)
+        res.send(result)
     } catch (err) {
-    res.status(500)
-    res.send(`{"error": Error deleting ${err}}`);
+        res.status(500)
+        res.send(`{"error": Error deleting ${err}}`);
     }
     };
     
