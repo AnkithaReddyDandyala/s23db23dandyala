@@ -1,44 +1,31 @@
 extends layout
-
 block content
     h1= title
-    
-        - let makeupid = toShow._id
-        - let makeup_brand = toShow.brand
-        - let makeup_id = toShow.id
-        - let makeup_price = toShow.price
-
-        div.row(class='mb-2')
-            div.mr-1 ID is
-            div #{makeupid}
-            - let actionid = "/resource/makeup/" + makeupid
-            form(id='makeupForm', action= actionid, method="PUT")
-                div.form-group
-                    label.makeupAttr(for='makeup_brand') Makeup brand
-                    input#makeup_brand(type='text', name='makeup_brand', value= makeup_brand )
-                div.form-group
-                    label.makeupAttr(for='makeup_id') Costume size
-                    input#makeup_id(type='number', name='makeup_id', value= makeup_id )
-                div.form-group
-                    label.makeupAttr(for='makeup_price') Costume cost
-                    input#makeup_price(type='number', name='makeup_price', value= makeup_price )
-                input(type="submit")
-
+    form(id='makeupForm', action="/resource/makeup", method="POST")
+        div.form-group
+            label.vehiclesAttr(for='name') Vehicle name
+            input#name(type='text', name='name')
+        div.form-group
+            label.vehiclesAttr(for='mileage') Vehicle mileage
+            input#mileage(type='number', name='mileage')
+        div.form-group
+            label.vehiclesAttr(for='price') Vehicle price
+            input#price(type='number', name='price')
+        input(type="submit")
     script.
         document.forms['makeupForm'].addEventListener('submit', (event) => {
-        event.preventDefault();
-
-// TODO do something here to show user that form is being submitted
-        fetch(event.target.action, {
-            method: 'PUT',
-            body: new URLSearchParams(new FormData(event.target)) // event.target is the form
-        }).then((resp) => {
-            return resp.json(); // or resp.text() or whatever the server sends
-        }).then((body) => {
-            alert("Update succeded")
-        // TODO handle body
-        }).catch((error) => {
-        // TODO handle error
-        alert("Update failed " + error )
+            event.preventDefault();
+            // TODO do something here to show user that form is being submitted
+            fetch(event.target.action, {
+                method: 'POST',
+                body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+            }).then((resp) => {
+                return resp.json(); // or resp.text() or whatever the server sends
+            }).then((body) => {
+                alert("Save succeded")
+                // TODO handle body
+            }).catch((error) => {
+                // TODO handle error
+                alert("Save failed " + error )
+            });
         });
-});
