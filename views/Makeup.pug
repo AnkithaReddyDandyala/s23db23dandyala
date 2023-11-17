@@ -4,11 +4,12 @@ block content
   h1= title
   - let items = results 
   div(class="container-fluid")
-  div(class="row")
-   each m,index  in results 
-    div(class="col-sm-2" onclick =`buy(${index})`) #{m.brand}, #{m.id}, #{m.price}
+    div(class="row")
+        each m,index  in results 
+            - let destination = `dispatch(\"/makeup/update?id=${m._id}\")`
+    div(class="col-sm-2" class="m-1") #{m.brand}, #{m.id}, #{m.price}
+        button.btn( class="btn-primary ml-1", onclick= destination) Update
     script.
-        function buy(a)
-        {
-            alert(`You purchased Item ${a+1}`)
+        function dispatch(path){
+        window.location.href=path
         }
