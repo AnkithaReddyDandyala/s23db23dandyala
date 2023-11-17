@@ -7,8 +7,8 @@ block content
     div(class="row")
         each m,index  in results 
             - let destination = `dispatch(\"/makeup/update?id=${m._id}\")`
-    div(class="col-sm-2" class="m-1") #{m.brand}, #{m.id}, #{m.price}
-        button.btn( class="btn-primary ml-1", onclick= destination) Update
+            div(class="col-sm-2" class="m-1") #{m.brand}, #{m.id}, #{m.price}
+                button.btn( class="btn-primary ml-1", onclick= destination) Update
     script.
         function dispatch(path){
         window.location.href=path
