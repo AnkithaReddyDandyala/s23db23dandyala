@@ -2,13 +2,22 @@ extends layout
 
 block content
   h1= title
+  button.btn.btn-primary(onClick=`dispatch(\"/makeup/create\")`) Create Makeup
   - let items = results 
   div(class="container-fluid")
-    div(class="row")
+    div(class="row m-1")
         each m,index  in results 
             - let destination = `dispatch(\"/makeup/update?id=${m._id}\")`
-            div(class="col-sm-2" class="m-1") #{m.brand}, #{m.id}, #{m.price}
+            - let details = `dispatch(\"/vehicles/detail?id=${v._id}\")`
+            - let deleteItem = `dispatch(\"/vehicles/delete?id=${v._id}\")`
+            div(class="col-sm-2" class="m-1") 
+              p Makeup brand: #{v.brand}
+              p Makeup id: #{v.id}
+              p Makeup Price: #{v.price}
+              div(class="row")
                 button.btn( class="btn-primary ml-1", onclick= destination) Update
+                button.btn.btn-success.m-2(onclick=details) View Details
+                button.btn.btn-danger.m-2(onclick=deleteItem) Delete
     script.
         function dispatch(path){
         window.location.href=path
