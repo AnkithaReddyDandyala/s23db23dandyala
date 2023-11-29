@@ -7,18 +7,18 @@
     div(class="container-fluid")
       div(class="row m-1")
           each m,index  in results 
-              - let destination = `dispatch(\"/makeup/update?id=${m._id}\")`
-              - let details = `dispatch(\"/makeup/detail?id=${v._id}\")`
-              - let deleteItem = `dispatch(\"/makeup/delete?id=${v._id}\")`
-              div(class="col-sm-2 p-10 m-2" class="m-1") 
-                p Makeup brand: #{v.brand}
-                p Makeup id: #{v.id}
-                p Makeup Price: #{v.price}
-                div(class="row")
-                  button.btn( class="btn-primary ml-1", onclick= destination) Update
-                  button.btn.btn-success.m-2(onclick=details) View Details
-                  button.btn.btn-danger.m-2(onclick=deleteItem) Delete
-      script.
-          function dispatch(path){
+            - let destination = `dispatch(\"/makeup/update?id=${m._id}\")`
+            - let details = `dispatch(\"/makeup/detail?id=${v._id}\")`
+            - let deleteItem = `dispatch(\"/makeup/delete?id=${v._id}\")`
+            div(class="col-sm-2 p-10 m-2" class="m-1") 
+              p Makeup brand: #{v.brand}
+              p Makeup id: #{v.id}
+              p Makeup Price: #{v.price}
+              div(class="row")
+                button.btn( class="btn-primary ml-1", onclick= destination) Update
+                button.btn.btn-success.m-2(onclick=details) View Details
+                button.btn.btn-danger.m-2(onclick=deleteItem) Delete
+    script.
+      function dispatch(path){
           window.location.href=path
-          }
+        }
